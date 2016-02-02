@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE generatorConfiguration  
+    PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"  
+    "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<!--驱动包的位置 -->
+	<classPathEntry location="E:/ojdbc14-10.2.0.3.jar" />
+	<context id="my" targetRuntime="MyBatis3">
+		<commentGenerator>
+			<property name="suppressDate" value="false" />
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		<jdbcConnection driverClass="oracle.jdbc.OracleDriver"
+			connectionURL="jdbc:oracle:thin:@116.213.210.67:1526:pmdb" userId="SYS_YZGL"
+			password="SYS_YZGL" />
+		<!-- 生成模型的包名和位置 -->
+		<javaModelGenerator targetPackage="com.aikids.redis.model"
+			targetProject="E:/SoftforJava/elipse_git_data/kbtc/src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		<!-- 生成的映射文件包名和位置:特别注意这里，因为idea必须读取resources下面的文件，除非写maven控件（不建议） -->
+		<sqlMapGenerator targetPackage="com.aikids.redis.mapping"
+			targetProject="E:/SoftforJava/elipse_git_data/kbtc/src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+		<!-- 生成DAO的包名和位置 -->
+		<javaClientGenerator targetPackage="com.aikids.redis.dao"
+			targetProject="E:/SoftforJava/elipse_git_data/kbtc/src/main/java"
+			type="XMLMAPPER">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+		
+		<!-- 要生成那些表(更改tableName和domainObjectName就可以) -->
+		<!-- <table tableName="V_KJ_CLASS" domainObjectName="Class"
+			enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" 
+			enableSelectByExample="true" selectByExampleQueryId="false">
+			<columnRenamingRule searchString="^D_" replaceString=""/>
+		</table>  -->
+		<table tableName="SYS_OPERATOR" domainObjectName="Person"
+			enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" 
+			enableSelectByExample="true" selectByExampleQueryId="false">
+			<columnRenamingRule searchString="^D_" replaceString=""/>
+		</table>
+		
+	</context>
+</generatorConfiguration>
