@@ -14,7 +14,7 @@ public class TestAction {
 	@ResponseBody
 	@RequestMapping("/TestAction/test")
 	public String test(){
-		System.out.println("这是一个Controller测试");
+		System.out.println("这是一个Controller测试123333333333333333");
 		return "HelloWorld!";
 	}
 }
