@@ -22,6 +22,7 @@ public class StatelessAuthcFilter extends AccessControlFilter {
 
 	@Override
 	protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
+		System.out.println("进入到无状态过滤器中");
 		// 1、客户端生成的消息摘要
 		String clientDigest = request.getParameter("digest");
 		// 2、客户端传入的用户身份

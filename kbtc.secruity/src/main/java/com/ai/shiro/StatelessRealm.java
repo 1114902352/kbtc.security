@@ -38,6 +38,7 @@ public class StatelessRealm extends AuthorizingRealm {
 		System.out.println("客户端摘要串:"+statelessToken.getClientDigest());
 		System.out.println("服务端摘要串:"+serverDigest);
 		// 然后进行客户端消息摘要和服务器端消息摘要的匹配
+		System.out.println("APP 登录成功==============================");
 		return new SimpleAuthenticationInfo(username, serverDigest, getName());
 	}
 
