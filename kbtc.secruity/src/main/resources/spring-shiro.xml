@@ -11,10 +11,10 @@
 
 	<!-- Realm实现 -->
 	<bean id="statelessRealm" class="com.ai.shiro.StatelessRealm">
-		<property name="cachingEnabled" value="false" />
+		<property name="cachingEnabled" value="true" />
 	</bean>
 	<bean id="webRealm" class="com.ai.shiro.WebRealm">
-		<property name="cachingEnabled" value="false" />
+		<property name="cachingEnabled" value="true" />
 	</bean>
 	<!-- 权限认证策略 -->
 	<bean id="authenticator" class="org.apache.shiro.authc.pam.ModularRealmAuthenticator">
@@ -30,21 +30,27 @@
 
 	<!-- 会话管理器 -->
 	<bean id="sessionManager" class="org.apache.shiro.session.mgt.DefaultSessionManager">
-		<!-- <property name="sessionValidationSchedulerEnabled" value="false" /> -->
+		<!-- <property name="globalSessionTimeout" value="3600000" /> <property 
+			name="sessionDAO" ref="zkShiroSessionDAO" /> <property name="sessionValidationScheduler" 
+			ref="sessionValidationScheduler" /> <property name="sessionValidationSchedulerEnabled" 
+			value="true" /> <property name="sessionIdCookie" ref="wapsession" /> -->
+		<property name="sessionDAO" ref="redisSessionDAO" />
 	</bean>
 	<!-- 安全管理器 -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="authenticator" ref="authenticator"></property>
 		<property name="realms">
 			<list>
-				<ref bean="statelessRealm"/>
-				<ref bean="webRealm"/>
+				<ref bean="statelessRealm" />
+				<ref bean="webRealm" />
 			</list>
 		</property>
 		<property name="subjectDAO.sessionStorageEvaluator.sessionStorageEnabled"
 			value="false" />
 		<property name="subjectFactory" ref="subjectFactory" />
+
 		<property name="sessionManager" ref="sessionManager" />
+		<property name="cacheManager" ref="cacheManager" />
 	</bean>
 	<!-- 相当于调用SecurityUtils.setSecurityManager(securityManager) -->
 	<bean
@@ -56,27 +62,49 @@
 	<!-- 过滤器 -->
 	<bean id="statelessAuthcFilter" class="com.ai.shiro.StatelessAuthcFilter" />
 	<bean id="webAuthcFilter" class="com.ai.shiro.WebAuthcFilter" />
-	
+
 	<!-- Shiro的Web过滤器 -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
 		<property name="filters">
 			<util:map>
 				<entry key="statelessAuthc" value-ref="statelessAuthcFilter" />
-				<entry key="webAucthc" value-ref="webAuthcFilter"/>
+				<entry key="webAucthc" value-ref="webAuthcFilter" />
 			</util:map>
 		</property>
 		<property name="filterChainDefinitions">
 			<value>
-				/** = webAucthc
-				<!-- /**=authc -->
-				<!-- /Web/*=webAucthc -->
-				<!-- /**=anon -->
-				<!-- /**=statelessAuthc -->
-				<!-- /**=webAucthc -->
+				<!-- /TestAction/Web/**=webAucthc -->
+				/TestAction/App/**=statelessAuthc
+				/TestAction/Web/**=webAucthc
+				/JSP/**=anon
+				/**=anon
 			</value>
 		</property>
 	</bean>
 	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+
+	<!-- Redis实现的session -->
+	<!-- start -->
+	<bean id="redisManager" class="org.crazycake.shiro.RedisManager">
+		<property name="host" value="${redis.host}" />
+		<property name="port" value="${redis.port}" />
+		<property name="expire" value="1800" />
+		<property name="timeout" value="10000" />
+		<!-- optional properties: <property name="password" value="123456"/> -->
+	</bean>
+	<!-- redisSessionDAO -->
+	<bean id="redisSessionDAO" class="org.crazycake.shiro.RedisSessionDAO">
+		<property name="redisManager" ref="redisManager" />
+	</bean>
+	<!-- sessionManager -->
+	<!-- <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager"> 
+		<property name="sessionDAO" ref="redisSessionDAO" /> </bean> -->
+
+	<!-- cacheManager -->
+	<bean id="cacheManager" class="org.crazycake.shiro.RedisCacheManager">
+		<property name="redisManager" ref="redisManager" />
+	</bean>
+	<!-- end -->
 </beans>  

@@ -1,5 +1,6 @@
 package com.ai.shiro;
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -8,7 +9,9 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.Subject;
 
 public class WebRealm extends AuthorizingRealm{
 
@@ -24,7 +27,8 @@ public class WebRealm extends AuthorizingRealm{
 		String username = (String) principals.getPrimaryPrincipal();
 		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
 		authorizationInfo.addRole("admin");
-		System.out.println("授权");
+//		session.setAttribute(arg0, arg1);
+		System.out.println("shiro已授权");
 		return authorizationInfo;
 	}
 
@@ -36,7 +40,14 @@ public class WebRealm extends AuthorizingRealm{
 		String password = new String(upToken.getPassword());
 		System.out.println("登录者的用户名为"+username);
 		System.out.println("登录者的密    码为"+password);
-		return new SimpleAuthenticationInfo(username, password, "张青");
+		if(("zhangqing").equals(username)&&("zq1992925").equals(password)){
+			Subject subject = SecurityUtils.getSubject();
+			Session session = subject.getSession();
+			session.setAttribute("TestSession", "我是shiro session中的参数");
+			return new SimpleAuthenticationInfo(username, password, "张青");
+		}else{
+			return null;
+		}
 	}
 
 }

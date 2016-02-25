@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -19,11 +20,14 @@ public class WebAuthcFilter extends AccessControlFilter {
 	@Override
 	protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
 		System.out.println("进入到根据登录密码验证过滤器");
+//		String referer = ((HttpServletRequest)request).getHeader("Referer");
+//		System.out.println("Referer==============="+referer);
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		UsernamePasswordToken token = new UsernamePasswordToken(username, password);
 		try {
 			getSubject(request, response).login(token);
+//			((HttpServletResponse)response).setHeader("Set-Cookie", "cookiename=cookievalue;HttpOnly");
 		} catch (Exception e) {
 			e.printStackTrace();
 			onLoginFail(response);
