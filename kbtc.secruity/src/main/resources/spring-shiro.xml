@@ -43,7 +43,6 @@
 	
 	<!-- 安全管理器 -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-		<property name="authenticator" ref="authenticator"></property>
 		<property name="realms">
 			<list>
 				<ref bean="appRealm" />
@@ -67,12 +66,12 @@
 	<bean id="appAuthcFilter" class="com.ai.shiro.app.AppAuthcFilter" />
 	<bean id="webAuthcFilter" class="com.ai.shiro.web.WebAuthcFilter" />
 	 <!-- 基于Form表单的身份验证过滤器 -->
-    <bean id="formAuthenticationFilter" class="org.apache.shiro.web.filter.authc.FormAuthenticationFilter">
+  <!--   <bean id="formAuthenticationFilter" class="org.apache.shiro.web.filter.authc.FormAuthenticationFilter">
         <property name="usernameParam" value="username"/>
         <property name="passwordParam" value="password"/>
-        <!-- <property name="rememberMeParam" value="rememberMe"/> -->
+        <property name="rememberMeParam" value="rememberMe"/>
         <property name="loginUrl" value="/login"/>
-    </bean>
+    </bean> -->
 
 
 	<!-- Shiro的Web过滤器 -->
@@ -96,21 +95,22 @@
 	</bean> -->
 	
 	<bean id="filterChainManager" class="com.ai.shiro.common.CustomDefaultFilterChainManager">
-   		<property name="loginUrl" value="/JSP/login.jsp"/>
-        <property name="successUrl" value="/JSP/success.jsp"/>
-        <property name="unauthorizedUrl" value="/JSP/unauthorized.jsp"/>
+   		<property name="loginUrl" value="/login.jsp"/>
+        <property name="successUrl" value="/success.jsp"/>
+        <property name="unauthorizedUrl" value="/unauthorized.jsp"/>
         <property name="customFilters">
             <util:map>
-                <entry key="authc" value-ref="formAuthenticationFilter"/>
+                <entry key="authc" value-ref="webAuthcFilter"/>
                 <!-- <entry key="webAuthc" value-ref="webAuthcFilter"/> -->
             </util:map>
         </property>
         <property name="defaultFilterChainDefinitions">
             <value>
-               	/login = authc
+               <!-- 	/login.jsp = anon
                 /logout = logout
                 /unauthorized = authc
                 /** = authc
+                /** = authc -->
             </value>
         </property>
     </bean>

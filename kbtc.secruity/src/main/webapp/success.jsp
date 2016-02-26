@@ -17,6 +17,7 @@
 	<input type="submit" value="取钱"/>
 </form>
 <h3>shiro session:<%=SecurityUtils.getSubject().getSession().getAttribute("TestSession")%></h3>
-<a href="<%=basePath%>/TestAction/loginout">退出</a>
+<a href="<%=basePath%>/logout">退出</a>
+<a href="<%=basePath%>/show.jsp">跳转</a>
 </body>
 </html>
