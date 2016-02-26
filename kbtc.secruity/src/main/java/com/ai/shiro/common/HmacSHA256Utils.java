@@ -1,4 +1,4 @@
-package com.ai.shiro;
+package com.ai.shiro.common;
 
 import java.util.List;
 import java.util.Map;

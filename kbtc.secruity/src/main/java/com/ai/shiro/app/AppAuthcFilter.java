@@ -1,4 +1,4 @@
-package com.ai.shiro;
+package com.ai.shiro.app;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -12,7 +12,7 @@ import org.apache.shiro.web.filter.AccessControlFilter;
 
 import com.sun.tools.javac.util.Constants;
 
-public class StatelessAuthcFilter extends AccessControlFilter {
+public class AppAuthcFilter extends AccessControlFilter {
 
 	@Override
 	protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue)
@@ -32,7 +32,7 @@ public class StatelessAuthcFilter extends AccessControlFilter {
 		params.remove("digest");
 
 		// 4、生成无状态Token
-		StatelessToken token = new StatelessToken(username, params, clientDigest);
+		AppToken token = new AppToken(username, params, clientDigest);
 
 		try {
 			// 5、委托给Realm进行登录

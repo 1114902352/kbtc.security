@@ -1,4 +1,4 @@
-package com.ai.shiro;
+package com.ai.shiro.web;
 
 import java.io.IOException;
 

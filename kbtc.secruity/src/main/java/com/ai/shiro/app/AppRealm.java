@@ -1,4 +1,4 @@
-package com.ai.shiro;
+package com.ai.shiro.app;
 
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -9,12 +9,14 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
-public class StatelessRealm extends AuthorizingRealm {
+import com.ai.shiro.common.HmacSHA256Utils;
+
+public class AppRealm extends AuthorizingRealm {
 
 	@Override
 	public boolean supports(AuthenticationToken token) {
 		// 仅支持StatelessToken类型的Token
-		return token instanceof StatelessToken;
+		return token instanceof AppToken;
 	}
 
 	@Override
@@ -29,7 +31,7 @@ public class StatelessRealm extends AuthorizingRealm {
 
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-		StatelessToken statelessToken = (StatelessToken) token;
+		AppToken statelessToken = (AppToken) token;
 		String username = statelessToken.getUsername();
 		// 根据用户名获取密钥（和客户端的一样）
 		String key = getKey(username);

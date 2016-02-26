@@ -7,7 +7,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.ai.shiro.HmacSHA256Utils;
+import com.ai.shiro.common.HmacSHA256Utils;
 
 public class TestToken {
 

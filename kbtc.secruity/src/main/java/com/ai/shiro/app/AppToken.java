@@ -1,16 +1,16 @@
-package com.ai.shiro;
+package com.ai.shiro.app;
 
 import java.util.Map;
 
 import org.apache.shiro.authc.AuthenticationToken;
 
-public class StatelessToken implements AuthenticationToken {
+public class AppToken implements AuthenticationToken {
 
 	private String username;
 	private Map<String, ?> params;
 	private String clientDigest;
 
-	public StatelessToken(String username, Map<String, ?> params, String clientDigest) {
+	public AppToken(String username, Map<String, ?> params, String clientDigest) {
 		this.username = username;
 		this.params = params;
 		this.clientDigest = clientDigest;

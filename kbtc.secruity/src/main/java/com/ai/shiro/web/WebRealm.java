@@ -1,4 +1,4 @@
-package com.ai.shiro;
+package com.ai.shiro.web;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
