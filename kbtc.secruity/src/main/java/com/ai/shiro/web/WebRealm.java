@@ -26,7 +26,9 @@ public class WebRealm extends AuthorizingRealm{
 		//授权
 		String username = (String) principals.getPrimaryPrincipal();
 		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-		authorizationInfo.addRole("admins");
+		authorizationInfo.addRole("adminstration");
+		authorizationInfo.addStringPermission("view");
+		authorizationInfo.addStringPermission("update");
 //		session.setAttribute(arg0, arg1);
 		System.out.println("shiro已授权");
 		return authorizationInfo;

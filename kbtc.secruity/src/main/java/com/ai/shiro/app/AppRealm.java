@@ -24,8 +24,6 @@ public class AppRealm extends AuthorizingRealm {
 		// 根据用户名查找角色，请根据需求实现
 		String username = (String) principals.getPrimaryPrincipal();
 		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-		authorizationInfo.addRole("admin");
-		System.out.println("授权");
 		return authorizationInfo;
 	}
 

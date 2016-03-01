@@ -10,10 +10,6 @@
 %>
 <body>
 <shiro:user>已登录</shiro:user><shiro:guest>游客</shiro:guest>
-<h2>Login success!</h2>
-<h3>您的余额为：${money}</h3>
-<a href="<%=basePath%>/web/reduce">取钱</a><br>
-<a href="<%=basePath%>/show.jsp">用户权限信息查看</a></br>
-<a href="<%=basePath%>/web/loginout">退出</a>
+<shiro:hasRole name="adminstration">权限[adminstration]</shiro:hasRole></br>
 </body>
 </html>

@@ -104,6 +104,12 @@
 			<artifactId>spring-test</artifactId>
 			<version>4.2.0.RELEASE</version>
 		</dependency>
+		<!-- 包括缓存等支撑 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>4.2.0.RELEASE</version>
+		</dependency>
 		<!--事务管理 -->
 		<dependency>
 			<groupId>org.aspectj</groupId>

@@ -17,5 +17,6 @@
 	<input type="text" value="zq1992925" name="password"/>
 	<input type="submit" value="Shiro登录"/>
 </form>
+<h3>shiro登录状态:<shiro:user>已登录</shiro:user><shiro:guest>游客</shiro:guest></h3>
 </body>
 </html>

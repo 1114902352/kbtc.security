@@ -29,12 +29,10 @@ public class CustomPathMatchingFilterChainResolver extends PathMatchingFilterCha
         }
 
         String requestURI = getPathWithinApplication(request);
-
         List<String> chainNames = new ArrayList<String>();
         //the 'chain names' in this implementation are actually path patterns defined by the user.  We just use them
         //as the chain name for the FilterChainManager's requirements
         for (String pathPattern : filterChainManager.getChainNames()) {
-
             // If the path does match, then pass on to the subclass implementation for specific checks:
             if (pathMatches(pathPattern, requestURI)) {
                 chainNames.add(pathPattern);
@@ -44,7 +42,6 @@ public class CustomPathMatchingFilterChainResolver extends PathMatchingFilterCha
         if(chainNames.size() == 0) {
             return null;
         }
-
         return customDefaultFilterChainManager.proxy(originalChain, chainNames);
     }
 }

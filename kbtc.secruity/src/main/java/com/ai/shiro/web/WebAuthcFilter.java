@@ -7,6 +7,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.web.filter.AccessControlFilter;
 
@@ -27,6 +28,7 @@ public class WebAuthcFilter extends AccessControlFilter {
 		UsernamePasswordToken token = new UsernamePasswordToken(username, password);
 		try {
 			getSubject(request, response).login(token);
+			SecurityUtils.getSubject().getSession().setAttribute("test", "123456");
 //			((HttpServletResponse)response).setHeader("Set-Cookie", "cookiename=cookievalue;HttpOnly");
 		} catch (Exception e) {
 			e.printStackTrace();
