@@ -1,5 +1,7 @@
 package com.ai.shiro.web;
 
+import java.security.Permission;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -9,6 +11,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.realm.jdbc.JdbcRealm;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
@@ -27,8 +30,9 @@ public class WebRealm extends AuthorizingRealm{
 		String username = (String) principals.getPrimaryPrincipal();
 		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
 		authorizationInfo.addRole("adminstration");
+//		authorizationInfo.addStringPermission("view");
 		authorizationInfo.addStringPermission("view");
-		authorizationInfo.addStringPermission("update");
+		authorizationInfo.addStringPermission("system:view:*");
 //		session.setAttribute(arg0, arg1);
 		System.out.println("shiro已授权");
 		return authorizationInfo;

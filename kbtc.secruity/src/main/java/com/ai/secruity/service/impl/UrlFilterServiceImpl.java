@@ -21,7 +21,7 @@ public class UrlFilterServiceImpl implements UrlFilterService {
     @Autowired
     private UrlFilterDao urlFilterDao;
 
-    @Autowired
+//    @Autowired
     private ShiroFilerChainManager shiroFilerChainManager;
 
     @Override
@@ -54,7 +54,7 @@ public class UrlFilterServiceImpl implements UrlFilterService {
         return urlFilterDao.findAll();
     }
 
-    @PostConstruct
+//    @PostConstruct
     public void initFilterChain() {
         shiroFilerChainManager.initFilterChains(findAll());
     }

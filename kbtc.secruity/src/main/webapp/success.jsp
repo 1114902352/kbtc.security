@@ -14,6 +14,6 @@
 <h3>您的余额为：${money}</h3>
 <a href="<%=basePath%>/web/reduce">取钱</a><br>
 <a href="<%=basePath%>/show.jsp">用户权限信息查看</a></br>
-<a href="<%=basePath%>/web/loginout">退出</a>
+<a href="<%=basePath%>/logout">退出</a>
 </body>
 </html>

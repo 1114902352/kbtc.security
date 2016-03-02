@@ -20,12 +20,12 @@ import com.ai.secruity.model.UrlFilter;
 @Service
 public class ShiroFilerChainManager {
 
-    @Autowired
+//    @Autowired
     private DefaultFilterChainManager filterChainManager;
 
     private Map<String, NamedFilterList> defaultFilterChains;
 
-    @PostConstruct
+//    @PostConstruct
     public void init() {
         defaultFilterChains = new HashMap<String, NamedFilterList>(filterChainManager.getFilterChains());
     }

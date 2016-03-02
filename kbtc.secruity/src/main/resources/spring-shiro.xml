@@ -24,6 +24,9 @@
 	<!-- 过滤器 -->
 	<bean id="appAuthcFilter" class="com.ai.shiro.app.AppAuthcFilter" />
 	<bean id="webAuthcFilter" class="com.ai.shiro.web.WebAuthcFilter" />
+	<bean id="logout" class="org.apache.shiro.web.filter.authc.LogoutFilter">
+		<property name="redirectUrl" value="/login.jsp" />
+	</bean>
 	<!-- 安全管理器 -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="realms">
@@ -66,45 +69,43 @@
 
 	<!-- 普通shiro权限 过滤器 -->
 	<!-- ===========================================start============================== -->
-	<!-- <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean"> 
-		<property name="securityManager" ref="securityManager" /> <property name="filters"> 
-		<util:map> <entry key="webAucthc" value-ref="webAuthcFilter" /> </util:map> 
-		</property> <property name="filterChainDefinitions"> <value> /login.jsp = 
-		anon /show.jsp = anon /** = webAucthc </value> </property> </bean> -->
-	<!-- ===========================================end============================== -->
-
-
-	<!-- 动态URL权限 过滤器 -->
-	<!-- ===========================================start============================== -->
-	<bean id="filterChainManager" class="com.ai.shiro.common.CustomDefaultFilterChainManager">
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="loginUrl" value="/login.jsp" />
 		<property name="successUrl" value="/success.jsp" />
 		<property name="unauthorizedUrl" value="/unauthorized.jsp" />
-		<property name="customFilters">
+		<property name="securityManager" ref="securityManager" />
+		<property name="filters">
 			<util:map>
-				<entry key="authc" value-ref="webAuthcFilter" />
+				<entry key="webAucthc" value-ref="webAuthcFilter" />
 			</util:map>
 		</property>
-		<property name="defaultFilterChainDefinitions">
+		<property name="filterChainDefinitions">
 			<value>
-				/web/toSuccess = authc
+				/logout = logout
+				/web/toSuccess = webAucthc
+				/show.jsp = roles[adminstration]
+				/web/reduce = perms[adminstration:update]
+				/test.jsp = roles[adminstration]
 			</value>
 		</property>
 	</bean>
-	<bean id="filterChainResolver"
-		class="com.ai.shiro.common.CustomPathMatchingFilterChainResolver">
-		<property name="customDefaultFilterChainManager" ref="filterChainManager" />
-	</bean>
-	<!-- Shiro的Web过滤器 -->
-	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
-		<property name="securityManager" ref="securityManager" />
-	</bean>
-	<bean
-		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-		<property name="targetObject" ref="shiroFilter" />
-		<property name="targetMethod" value="setFilterChainResolver" />
-		<property name="arguments" ref="filterChainResolver" />
-	</bean>
+	<!-- ===========================================end============================== -->
+
+	<!-- 动态URL权限 过滤器 -->
+	<!-- ===========================================start============================== -->
+	<!-- <bean id="filterChainManager" class="com.ai.shiro.common.CustomDefaultFilterChainManager"> 
+		<property name="loginUrl" value="/login.jsp" /> <property name="successUrl" 
+		value="/success.jsp" /> <property name="unauthorizedUrl" value="/unauthorized.jsp" 
+		/> <property name="customFilters"> <util:map> <entry key="authc" value-ref="webAuthcFilter" 
+		/> <entry key="logout" value-ref="logout"/> </util:map> </property> <property 
+		name="defaultFilterChainDefinitions"> <value> /logout = logout /web/toSuccess 
+		= authc </value> </property> </bean> <bean id="filterChainResolver" class="com.ai.shiro.common.CustomPathMatchingFilterChainResolver"> 
+		<property name="customDefaultFilterChainManager" ref="filterChainManager" 
+		/> </bean> <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean"> 
+		<property name="securityManager" ref="securityManager" /> </bean> <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean"> 
+		<property name="targetObject" ref="shiroFilter" /> <property name="targetMethod" 
+		value="setFilterChainResolver" /> <property name="arguments" ref="filterChainResolver" 
+		/> </bean> -->
 	<!-- ===========================================end============================== -->
 
 
