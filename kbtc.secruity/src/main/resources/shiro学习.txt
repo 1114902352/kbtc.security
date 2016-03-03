@@ -1,116 +1,127 @@
-¸ú×Å¿ªÌÎÑ§shiro µÚ¶şÕÂ Éí·İÑéÖ¤
-ÑéÖ¤(Authentication):Ïàµ±ÓÚµÇÂ¼£¬¼´Éí·İÑéÖ¤µÄ¹ı³Ì£¬Ö¤Ã÷Ò»¸öÓÃ»§µÄÕæÊÇÉí·İ£¬ĞèÒªÌá¹©ÏµÍ³Àí½âºÍÏàĞÅµÄÉí·İĞÅÏ¢Ö¤¾İ¡£
-Éí·İ(Principals):SujectµÄ±êÊ¶ÊôĞÔ£¬¿ÉÒÔÊÇÈÎºÎ¶«Î÷£¬ÈçÓÃ»§Ãû¡¢ÓÊÏäµÈ£¬Îª±£Ö¤Î¨Ò»¶ÀÌØµÄ±êÊ¶£¬Ò»°ãÊÇÊ¹ÓÃÓÃ»§Ãû»òÓÊÏäµØÖ·¡£
-Ö¤Ã÷(Credentials):Ö¤Ã÷Ö÷ÌåÕæÕıÓµÓĞËùĞèµÄÉí·İ£¬±ÈÈçÃÜÂë¡¢Ö¸ÎÆµÈ»úÃÜÄÚÈİ¡£
+è®¤è¯Authenticationï¼šåæ–‡è®²è§£
+æˆæƒAuthorizationï¼šåæ–‡è®²è§£
 
-AuthenticatingÁ÷³Ì:
-1¡¢ÊÕ¼¯SujectÌá½»µÄÉí·İºÍÖ¤Ã÷£¬¹¹ÔìÒ»¸öToken£¬±ÈÈçUsernamePasswordToken
-2¡¢µ÷ÓÃdoGetAuthenticationInfo·½·¨µÇÂ¼,Ò»°ãÊÇÓÉsubject.login(token)·½·¨µ÷ÓÃ,²»ÕıÈ·Ê±Å×³ö¸÷ÖÖÒì³£¡£
-3¡¢Ìá½»ÄÚÈİÕıÈ·£¬ÔÊĞí·ÃÎÊ£¬·ñÔò×èÖ¹·ÃÎÊ£¬ÓÉAccessControlFilter¼°Æä×ÓÀàÊµÏÖonAccessDenied·½·¨£¬ÑéÖ¤³É¹¦·µ»ØTrue¡£
+Session Managerï¼šä¼šè¯ç®¡ç†ï¼Œå³ç”¨æˆ·ç™»å½•åå°±æ˜¯ä¸€æ¬¡ä¼šè¯ï¼Œåœ¨æ²¡æœ‰é€€å‡ºä¹‹å‰ï¼Œå®ƒçš„æ‰€æœ‰ä¿¡æ¯éƒ½åœ¨ä¼šè¯ä¸­ï¼›ä¼šè¯å¯ä»¥æ˜¯æ™®é€šJavaSEç¯å¢ƒçš„ï¼Œä¹Ÿå¯ä»¥æ˜¯å¦‚Webç¯å¢ƒçš„ï¼›
+Cryptographyï¼šåŠ å¯†ï¼Œä¿æŠ¤æ•°æ®çš„å®‰å…¨æ€§ï¼Œå¦‚å¯†ç åŠ å¯†å­˜å‚¨åˆ°æ•°æ®åº“ï¼Œè€Œä¸æ˜¯æ˜æ–‡å­˜å‚¨ï¼›
+Cachingï¼šç¼“å­˜ï¼Œæ¯”å¦‚ç”¨æˆ·ç™»å½•åï¼Œå…¶ç”¨æˆ·ä¿¡æ¯ã€æ‹¥æœ‰çš„è§’è‰²/æƒé™ä¸å¿…æ¯æ¬¡å»æŸ¥ï¼Œè¿™æ ·å¯ä»¥æé«˜æ•ˆç‡ï¼›
 
-ÒÑ¼Ç×¡(Remembered):Ò»¸öremeberedµÄsubjectÃ»ÓĞÉí·İ¼°subject.getPrincipals()Îª¿Õ¡£²»ÄÜ×÷ÎªÕæÊµµÇÂ¼ÓÃ»§Ê¹ÓÃ¡£
-ÒÑÑéÖ¤(Authenticated):Ò»¸öAuthenticatedµÄsuject³É¹¦ÑéÖ¤ºó´æÓÚsessionÖĞ£¬suject.isAuthenticated()==true
-ÍË³ö£ºsuject.logout£¬É¾³ısession£¬ÖØĞÂ±»ÈÏ¶¨ÎªÄäÃû·ÃÎÊ¡£
+Subjectï¼šä¸»ä½“ï¼Œä»£è¡¨äº†å½“å‰â€œç”¨æˆ·â€ï¼Œè¿™ä¸ªç”¨æˆ·ä¸ä¸€å®šæ˜¯ä¸€ä¸ªå…·ä½“çš„äººï¼Œä¸å½“å‰åº”ç”¨äº¤äº’çš„ä»»ä½•ä¸œè¥¿éƒ½æ˜¯Subject
+SecurityManagerï¼šå®‰å…¨ç®¡ç†å™¨ï¼›å³æ‰€æœ‰ä¸å®‰å…¨æœ‰å…³çš„æ“ä½œéƒ½ä¼šä¸SecurityManageräº¤äº’ï¼›ä¸”å®ƒç®¡ç†ç€æ‰€æœ‰Subjectï¼›
+Realmï¼šåŸŸï¼ŒShiroä»ä»Realmè·å–å®‰å…¨æ•°æ®ï¼ˆå¦‚ç”¨æˆ·ã€è§’è‰²ã€æƒé™ï¼‰ï¼Œå®‰å…¨æ•°æ®æº
 
+è·Ÿç€å¼€æ¶›å­¦shiro ç¬¬äºŒç«  èº«ä»½éªŒè¯
+éªŒè¯(Authentication):ç›¸å½“äºç™»å½•ï¼Œå³èº«ä»½éªŒè¯çš„è¿‡ç¨‹ï¼Œè¯æ˜ä¸€ä¸ªç”¨æˆ·çš„çœŸæ˜¯èº«ä»½ï¼Œéœ€è¦æä¾›ç³»ç»Ÿç†è§£å’Œç›¸ä¿¡çš„èº«ä»½ä¿¡æ¯è¯æ®ã€‚
+èº«ä»½(Principals):Sujectçš„æ ‡è¯†å±æ€§ï¼Œå¯ä»¥æ˜¯ä»»ä½•ä¸œè¥¿ï¼Œå¦‚ç”¨æˆ·åã€é‚®ç®±ç­‰ï¼Œä¸ºä¿è¯å”¯ä¸€ç‹¬ç‰¹çš„æ ‡è¯†ï¼Œä¸€èˆ¬æ˜¯ä½¿ç”¨ç”¨æˆ·åæˆ–é‚®ç®±åœ°å€ã€‚
+è¯æ˜(Credentials):è¯æ˜ä¸»ä½“çœŸæ­£æ‹¥æœ‰æ‰€éœ€çš„èº«ä»½ï¼Œæ¯”å¦‚å¯†ç ã€æŒ‡çº¹ç­‰æœºå¯†å†…å®¹ã€‚
 
-ÈÏÖ¤²ßÂÔ(AuthenticationStrategy):¶à¸öRealmÊ±£¬°´ÕÕÅäÖÃµÄ²ßÂÔ½øĞĞÆ¥Åä¡£
-FirstSuccessfulStrategy£ºÖ»ÒªÓĞÒ»¸öRealmÑéÖ¤³É¹¦¼´¿É£¬Ö»·µ»ØµÚÒ»¸öRealmÉí·İÑéÖ¤³É¹¦µÄÈÏÖ¤ĞÅÏ¢£¬ÆäËûµÄºöÂÔ£»
-AtLeastOneSuccessfulStrategy£ºÖ»ÒªÓĞÒ»¸öRealmÑéÖ¤³É¹¦¼´¿É£¬ºÍFirstSuccessfulStrategy²»Í¬£¬·µ»ØËùÓĞRealmÉí·İÑéÖ¤³É¹¦µÄÈÏÖ¤ĞÅÏ¢£»
-AllSuccessfulStrategy£ºËùÓĞRealmÑéÖ¤³É¹¦²ÅËã³É¹¦£¬ÇÒ·µ»ØËùÓĞRealmÉí·İÑéÖ¤³É¹¦µÄÈÏÖ¤ĞÅÏ¢£¬Èç¹ûÓĞÒ»¸öÊ§°Ü¾ÍÊ§°ÜÁË¡£
+Authenticatingæµç¨‹:
+1ã€æ”¶é›†Sujectæäº¤çš„èº«ä»½å’Œè¯æ˜ï¼Œæ„é€ ä¸€ä¸ªTokenï¼Œæ¯”å¦‚UsernamePasswordToken
+2ã€è°ƒç”¨doGetAuthenticationInfoæ–¹æ³•ç™»å½•,ä¸€èˆ¬æ˜¯ç”±subject.login(token)æ–¹æ³•è°ƒç”¨,ä¸æ­£ç¡®æ—¶æŠ›å‡ºå„ç§å¼‚å¸¸ã€‚
+3ã€æäº¤å†…å®¹æ­£ç¡®ï¼Œå…è®¸è®¿é—®ï¼Œå¦åˆ™é˜»æ­¢è®¿é—®ï¼Œç”±AccessControlFilteråŠå…¶å­ç±»å®ç°onAccessDeniedæ–¹æ³•ï¼ŒéªŒè¯æˆåŠŸè¿”å›Trueã€‚
 
-IniRealm£ºÍ¨¹ıini.txtÎÄ¼ş»ñÈ¡Ö÷ÌåĞÅÏ¢
-PropertiesRealm£ºÍ¨¹ıÅäÖÃÎÄ¼ş»ñÈ¡Ö÷ÌåĞÅÏ¢
-JdbcRealm£ºÍ¨¹ıÊı¾İ¿â»ñÈ¡Ö÷ÌåĞÅÏ¢£¬×¢ÒâÄ¬ÈÏ»ñÈ¡Êı¾İÊ±±ØĞë°´ÕÕËüµÄ±í½á¹¹£¬µ«ÊÇÎÒÃÇ¿ÉÒÔÍ¨¹ı×¢Èë×Ô¼ºµÄSQLÀ´¸²¸Ç¡£
-Ò»°ãÇé¿öÏÂ£¬ÎÒÃÇ¶¼ÊÇÒª×Ô¼º¶¨ÒåRealm¡£
-
-
-
-¸ú×Å¿ªÌÎÑ§shiro µÚ¶şÕÂ ÊÚÈ¨
-ÊÚÈ¨£º·ÃÎÊ¿ØÖÆ£¬¼´Ó¦ÓÃÖĞ¿ØÖÆË­ÄÜ·ÃÎÊÄÄĞ©×ÊÔ´¡£
-1¡¢Ê×ÏÈµ÷ÓÃSubject.isPermitted*/hasRole*½Ó¿Ú£¬Æä»áÎ¯ÍĞ¸øSecurityManager£¬¶øSecurityManager½Ó×Å»áÎ¯ÍĞ¸øAuthorizer£»
-2¡¢AuthorizerÊÇÕæÕıµÄÊÚÈ¨Õß£¬Èç¹ûÎÒÃÇµ÷ÓÃÈçisPermitted(¡°user:view¡±)£¬ÆäÊ×ÏÈ»áÍ¨¹ıPermissionResolver°Ñ×Ö·û´®×ª»»³ÉÏàÓ¦µÄPermissionÊµÀı£»
-3¡¢ÔÚ½øĞĞÊÚÈ¨Ö®Ç°£¬Æä»áµ÷ÓÃÏàÓ¦µÄRealm»ñÈ¡SubjectÏàÓ¦µÄ½ÇÉ«/È¨ÏŞÓÃÓÚÆ¥Åä´«ÈëµÄ½ÇÉ«/È¨ÏŞ£»
-4¡¢Authorizer»áÅĞ¶ÏRealmµÄ½ÇÉ«/È¨ÏŞÊÇ·ñºÍ´«ÈëµÄÆ¥Åä£¬Èç¹ûÓĞ¶à¸öRealm£¬»áÎ¯ÍĞ¸øModularRealmAuthorizer½øĞĞÑ­»·ÅĞ¶Ï£¬Èç¹ûÆ¥ÅäÈçisPermitted*/hasRole*»á·µ»Øtrue£¬·ñÔò·µ»Øfalse±íÊ¾ÊÚÈ¨Ê§°Ü
-
-ÅĞ¶¨ÊÇ·ñº¬ÓĞÄ³ÖÖÈ¨ÏŞµÄ·½·¨£º
-±à³ÌÊ½£ºsuject.hasRole("admin")
-×¢½âÊ½£º@RequeiresRoles("admin")
-JSP±êÇ©:<shiro:hasRole name="admin"></shiro:hasRole>
-
-×¢Òâ£º
-subject.hasRole("admin")ÊÇ·µ»ØÒ»¸öbooleanÀàĞÍ
-subject.checkRole("admin")±¾ÉíÊÇÒ»¸övoid£¬Ö»Òªµ±È¨ÏŞ²»Âú×ãÊ±»áÅ×³öÒ»¸öUnauthorizedException
-
-È¨ÏŞ×Ö·û´®£º
-role=system:money:* ¸ø½ÇÉ«ÊÚÓèÒ»¸öÈı¼¶È¨ÏŞ£¬ÆäÖĞ*´ú±íÈÎÒ»²Ù×÷£¬´ËÊ±subject.isPermitted("system:money:update")==true
-role=*:money:update ¿ÉÒÔÆ¥Åä*:money:update
+å·²è®°ä½(Remembered):ä¸€ä¸ªremeberedçš„subjectæ²¡æœ‰èº«ä»½åŠsubject.getPrincipals()ä¸ºç©ºã€‚ä¸èƒ½ä½œä¸ºçœŸå®ç™»å½•ç”¨æˆ·ä½¿ç”¨ã€‚
+å·²éªŒè¯(Authenticated):ä¸€ä¸ªAuthenticatedçš„sujectæˆåŠŸéªŒè¯åå­˜äºsessionä¸­ï¼Œsuject.isAuthenticated()==true
+é€€å‡ºï¼šsuject.logoutï¼Œåˆ é™¤sessionï¼Œé‡æ–°è¢«è®¤å®šä¸ºåŒ¿åè®¿é—®ã€‚
 
 
-Ìá¸ß²¿·Ö
+è®¤è¯ç­–ç•¥(AuthenticationStrategy):å¤šä¸ªRealmæ—¶ï¼ŒæŒ‰ç…§é…ç½®çš„ç­–ç•¥è¿›è¡ŒåŒ¹é…ã€‚
+FirstSuccessfulStrategyï¼šåªè¦æœ‰ä¸€ä¸ªRealméªŒè¯æˆåŠŸå³å¯ï¼Œåªè¿”å›ç¬¬ä¸€ä¸ªRealmèº«ä»½éªŒè¯æˆåŠŸçš„è®¤è¯ä¿¡æ¯ï¼Œå…¶ä»–çš„å¿½ç•¥ï¼›
+AtLeastOneSuccessfulStrategyï¼šåªè¦æœ‰ä¸€ä¸ªRealméªŒè¯æˆåŠŸå³å¯ï¼Œå’ŒFirstSuccessfulStrategyä¸åŒï¼Œè¿”å›æ‰€æœ‰Realmèº«ä»½éªŒè¯æˆåŠŸçš„è®¤è¯ä¿¡æ¯ï¼›
+AllSuccessfulStrategyï¼šæ‰€æœ‰RealméªŒè¯æˆåŠŸæ‰ç®—æˆåŠŸï¼Œä¸”è¿”å›æ‰€æœ‰Realmèº«ä»½éªŒè¯æˆåŠŸçš„è®¤è¯ä¿¡æ¯ï¼Œå¦‚æœæœ‰ä¸€ä¸ªå¤±è´¥å°±å¤±è´¥äº†ã€‚
+
+IniRealmï¼šé€šè¿‡ini.txtæ–‡ä»¶è·å–ä¸»ä½“ä¿¡æ¯
+PropertiesRealmï¼šé€šè¿‡é…ç½®æ–‡ä»¶è·å–ä¸»ä½“ä¿¡æ¯
+JdbcRealmï¼šé€šè¿‡æ•°æ®åº“è·å–ä¸»ä½“ä¿¡æ¯ï¼Œæ³¨æ„é»˜è®¤è·å–æ•°æ®æ—¶å¿…é¡»æŒ‰ç…§å®ƒçš„è¡¨ç»“æ„ï¼Œä½†æ˜¯æˆ‘ä»¬å¯ä»¥é€šè¿‡æ³¨å…¥è‡ªå·±çš„SQLæ¥è¦†ç›–ã€‚
+ä¸€èˆ¬æƒ…å†µä¸‹ï¼Œæˆ‘ä»¬éƒ½æ˜¯è¦è‡ªå·±å®šä¹‰Realmã€‚
 
 
-×Ô¶¨ÒåÊ±¿ÉÒÔÊµÏÖµÄÀ¹½ØÆ÷µÄ³éÏóÀà:
-AdviceFilter---Ìá¹©ÁËAOP·ç¸ñµÄÖ§³Ö£¬ÀàËÆÓÚSpringMVCÖĞµÄInterceptor£¬¼´Ç°ÖÃºóÖÃÔöÇ¿,³éÏó·½·¨ÈçÏÂ£º
+
+è·Ÿç€å¼€æ¶›å­¦shiro ç¬¬äºŒç«  æˆæƒ
+æˆæƒ(Authorization)ï¼šè®¿é—®æ§åˆ¶ï¼Œå³åº”ç”¨ä¸­æ§åˆ¶è°èƒ½è®¿é—®å“ªäº›èµ„æºã€‚
+1ã€é¦–å…ˆè°ƒç”¨Subject.isPermitted*/hasRole*æ¥å£ï¼Œå…¶ä¼šå§”æ‰˜ç»™SecurityManagerï¼Œè€ŒSecurityManageræ¥ç€ä¼šå§”æ‰˜ç»™Authorizerï¼›
+2ã€Authorizeræ˜¯çœŸæ­£çš„æˆæƒè€…ï¼Œå¦‚æœæˆ‘ä»¬è°ƒç”¨å¦‚isPermitted(â€œuser:viewâ€)ï¼Œå…¶é¦–å…ˆä¼šé€šè¿‡PermissionResolveræŠŠå­—ç¬¦ä¸²è½¬æ¢æˆç›¸åº”çš„Permissionå®ä¾‹ï¼›
+3ã€åœ¨è¿›è¡Œæˆæƒä¹‹å‰ï¼Œå…¶ä¼šè°ƒç”¨ç›¸åº”çš„Realmè·å–Subjectç›¸åº”çš„è§’è‰²/æƒé™ç”¨äºåŒ¹é…ä¼ å…¥çš„è§’è‰²/æƒé™ï¼›
+4ã€Authorizerä¼šåˆ¤æ–­Realmçš„è§’è‰²/æƒé™æ˜¯å¦å’Œä¼ å…¥çš„åŒ¹é…ï¼Œå¦‚æœæœ‰å¤šä¸ªRealmï¼Œä¼šå§”æ‰˜ç»™ModularRealmAuthorizerè¿›è¡Œå¾ªç¯åˆ¤æ–­ï¼Œå¦‚æœåŒ¹é…å¦‚isPermitted*/hasRole*ä¼šè¿”å›trueï¼Œå¦åˆ™è¿”å›falseè¡¨ç¤ºæˆæƒå¤±è´¥
+
+åˆ¤å®šæ˜¯å¦å«æœ‰æŸç§æƒé™çš„æ–¹æ³•ï¼š
+ç¼–ç¨‹å¼ï¼šsuject.hasRole("admin")
+æ³¨è§£å¼ï¼š@RequeiresRoles("admin")
+JSPæ ‡ç­¾:<shiro:hasRole name="admin"></shiro:hasRole>
+
+æ³¨æ„ï¼š
+subject.hasRole("admin")æ˜¯è¿”å›ä¸€ä¸ªbooleanç±»å‹
+subject.checkRole("admin")æœ¬èº«æ˜¯ä¸€ä¸ªvoidï¼Œåªè¦å½“æƒé™ä¸æ»¡è¶³æ—¶ä¼šæŠ›å‡ºä¸€ä¸ªUnauthorizedException
+
+æƒé™å­—ç¬¦ä¸²ï¼š
+role=system:money:* ç»™è§’è‰²æˆäºˆä¸€ä¸ªä¸‰çº§æƒé™ï¼Œå…¶ä¸­*ä»£è¡¨ä»»ä¸€æ“ä½œï¼Œæ­¤æ—¶subject.isPermitted("system:money:update")==true
+role=*:money:update å¯ä»¥åŒ¹é…*:money:update
+
+
+æé«˜éƒ¨åˆ†
+
+
+è‡ªå®šä¹‰æ—¶å¯ä»¥å®ç°çš„æ‹¦æˆªå™¨çš„æŠ½è±¡ç±»:
+AdviceFilter---æä¾›äº†AOPé£æ ¼çš„æ”¯æŒï¼Œç±»ä¼¼äºSpringMVCä¸­çš„Interceptorï¼Œå³å‰ç½®åç½®å¢å¼º,æŠ½è±¡æ–¹æ³•å¦‚ä¸‹ï¼š
 boolean preHandle(ServletRequest request, ServletResponse response) throws Exception  
 void postHandle(ServletRequest request, ServletResponse response) throws Exception  
 void afterCompletion(ServletRequest request, ServletResponse response, Exception exception) throws Exception;
 
-PathMatchingFilter---URLÆ¥Åä£¬Ò»µ©Æ¥Åä³É¹¦¾Í¸ÉÄ³¼şÊÂ£¬³éÏó·½·¨
-boolean pathsMatch(String path, ServletRequest request)  Æ¥Åä³É¹¦·µ»ØtrueÖ´ĞĞonPreHandle·½·¨
-boolean onPreHandle(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception ·µ»ØfalseÖĞ¶ÏÁ÷³Ì
+PathMatchingFilter---URLåŒ¹é…ï¼Œä¸€æ—¦åŒ¹é…æˆåŠŸå°±å¹²æŸä»¶äº‹ï¼ŒæŠ½è±¡æ–¹æ³•
+boolean pathsMatch(String path, ServletRequest request)  åŒ¹é…æˆåŠŸè¿”å›trueæ‰§è¡ŒonPreHandleæ–¹æ³•
+boolean onPreHandle(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception è¿”å›falseä¸­æ–­æµç¨‹
 
-AccessControlFilter--Ìá¹©ÁË·ÃÎÊ¿ØÖÆµÄ»ù´¡¹¦ÄÜ£»±ÈÈçÊÇ·ñÔÊĞí·ÃÎÊ/µ±·ÃÎÊ¾Ü¾øÊ±ÈçºÎ´¦ÀíµÈ£º
-abstract boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception;  ±íÊ¾ÊÇ·ñÔÊĞí·ÃÎÊ,mappedValue¾ÍÊÇ[urls]ÅäÖÃÖĞÀ¹½ØÆ÷²ÎÊı²¿·Ö£¬Èç¹ûÔÊĞí·ÃÎÊ·µ»Øtrue£¬·ñÔòfalse£»
-boolean onAccessDenied(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception;  ±íÊ¾µ±·ÃÎÊ¾Ü¾øÊ±ÊÇ·ñÒÑ¾­´¦ÀíÁË£»Èç¹û·µ»Øtrue±íÊ¾ĞèÒª¼ÌĞø´¦Àí£»Èç¹û·µ»Øfalse±íÊ¾¸ÃÀ¹½ØÆ÷ÊµÀıÒÑ¾­´¦ÀíÁË£¬½«Ö±½Ó·µ»Ø¼´¿É¡£
+AccessControlFilter--æä¾›äº†è®¿é—®æ§åˆ¶çš„åŸºç¡€åŠŸèƒ½ï¼›æ¯”å¦‚æ˜¯å¦å…è®¸è®¿é—®/å½“è®¿é—®æ‹’ç»æ—¶å¦‚ä½•å¤„ç†ç­‰ï¼š
+abstract boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception;  è¡¨ç¤ºæ˜¯å¦å…è®¸è®¿é—®,mappedValueå°±æ˜¯[urls]é…ç½®ä¸­æ‹¦æˆªå™¨å‚æ•°éƒ¨åˆ†ï¼Œå¦‚æœå…è®¸è®¿é—®è¿”å›trueï¼Œå¦åˆ™falseï¼›
+boolean onAccessDenied(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception;  è¡¨ç¤ºå½“è®¿é—®æ‹’ç»æ—¶æ˜¯å¦å·²ç»å¤„ç†äº†ï¼›å¦‚æœè¿”å›trueè¡¨ç¤ºéœ€è¦ç»§ç»­å¤„ç†ï¼›å¦‚æœè¿”å›falseè¡¨ç¤ºè¯¥æ‹¦æˆªå™¨å®ä¾‹å·²ç»å¤„ç†äº†ï¼Œå°†ç›´æ¥è¿”å›å³å¯ã€‚
 
 .....
 
 
-ÒÑÊµÏÖµÄÄ¬ÈÏÀ¹½ØÆ÷:
-Éí·İÑéÖ¤Ïà¹ØµÄ
+å·²å®ç°çš„é»˜è®¤æ‹¦æˆªå™¨:
+èº«ä»½éªŒè¯ç›¸å…³çš„
 authc---org.apache.shiro.web.filter.authc.FormAuthenticationFilter
-»ùÓÚ±íµ¥µÄÀ¹½ØÆ÷£»Èç¡°/**=authc¡±£¬Èç¹ûÃ»ÓĞµÇÂ¼»áÌøµ½ÏàÓ¦µÄµÇÂ¼Ò³ÃæµÇÂ¼£»
-Ö÷ÒªÊôĞÔ£º
-usernameParam£º±íµ¥Ìá½»µÄÓÃ»§Ãû²ÎÊıÃû£¨ username£©£» passwordParam£º±íµ¥Ìá½»µÄÃÜÂë²ÎÊıÃû£¨password£©£»
-rememberMeParam£º±íµ¥Ìá½»µÄÃÜÂë²ÎÊıÃû£¨rememberMe£©£»  loginUrl£ºµÇÂ¼Ò³ÃæµØÖ·£¨/login.jsp£©£»
-successUrl£ºµÇÂ¼³É¹¦ºóµÄÄ¬ÈÏÖØ¶¨ÏòµØÖ·£» failureKeyAttribute£ºµÇÂ¼Ê§°Üºó´íÎóĞÅÏ¢´æ´¢key£¨shiroLoginFailure£©£»
+åŸºäºè¡¨å•çš„æ‹¦æˆªå™¨ï¼›å¦‚â€œ/**=authcâ€ï¼Œå¦‚æœæ²¡æœ‰ç™»å½•ä¼šè·³åˆ°ç›¸åº”çš„ç™»å½•é¡µé¢ç™»å½•ï¼›
+ä¸»è¦å±æ€§ï¼š
+usernameParamï¼šè¡¨å•æäº¤çš„ç”¨æˆ·åå‚æ•°åï¼ˆ usernameï¼‰ï¼› passwordParamï¼šè¡¨å•æäº¤çš„å¯†ç å‚æ•°åï¼ˆpasswordï¼‰ï¼›
+rememberMeParamï¼šè¡¨å•æäº¤çš„å¯†ç å‚æ•°åï¼ˆrememberMeï¼‰ï¼›  loginUrlï¼šç™»å½•é¡µé¢åœ°å€ï¼ˆ/login.jspï¼‰ï¼›
+successUrlï¼šç™»å½•æˆåŠŸåçš„é»˜è®¤é‡å®šå‘åœ°å€ï¼› failureKeyAttributeï¼šç™»å½•å¤±è´¥åé”™è¯¯ä¿¡æ¯å­˜å‚¨keyï¼ˆshiroLoginFailureï¼‰ï¼›
 
 authcBasic---org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter	
-Basic HTTPÉí·İÑéÖ¤À¹½ØÆ÷£¬Ö÷ÒªÊôĞÔ£º applicationName£ºµ¯³öµÇÂ¼¿òÏÔÊ¾µÄĞÅÏ¢£¨application£©£»
+Basic HTTPèº«ä»½éªŒè¯æ‹¦æˆªå™¨ï¼Œä¸»è¦å±æ€§ï¼š applicationNameï¼šå¼¹å‡ºç™»å½•æ¡†æ˜¾ç¤ºçš„ä¿¡æ¯ï¼ˆapplicationï¼‰ï¼›
 
 logout---org.apache.shiro.web.filter.authc.LogoutFilter
-ÍË³öÀ¹½ØÆ÷£¬Ö÷ÒªÊôĞÔ£ºredirectUrl£ºÍË³ö³É¹¦ºóÖØ¶¨ÏòµÄµØÖ·£¨/£©;Ê¾Àı¡°/logout=logout¡±
+é€€å‡ºæ‹¦æˆªå™¨ï¼Œä¸»è¦å±æ€§ï¼šredirectUrlï¼šé€€å‡ºæˆåŠŸåé‡å®šå‘çš„åœ°å€ï¼ˆ/ï¼‰;ç¤ºä¾‹â€œ/logout=logoutâ€
 
 user---org.apache.shiro.web.filter.authc.UserFilter
-ÓÃ»§À¹½ØÆ÷£¬ÓÃ»§ÒÑ¾­Éí·İÑéÖ¤/¼Ç×¡ÎÒµÇÂ¼µÄ¶¼¿É£»Ê¾Àı¡°/**=user¡±
+ç”¨æˆ·æ‹¦æˆªå™¨ï¼Œç”¨æˆ·å·²ç»èº«ä»½éªŒè¯/è®°ä½æˆ‘ç™»å½•çš„éƒ½å¯ï¼›ç¤ºä¾‹â€œ/**=userâ€
 
 anon---org.apache.shiro.web.filter.authc.AnonymousFilter
-ÄäÃûÀ¹½ØÆ÷£¬¼´²»ĞèÒªµÇÂ¼¼´¿É·ÃÎÊ£»Ò»°ãÓÃÓÚ¾²Ì¬×ÊÔ´¹ıÂË£»Ê¾Àı¡°/static/**=anon¡±
+åŒ¿åæ‹¦æˆªå™¨ï¼Œå³ä¸éœ€è¦ç™»å½•å³å¯è®¿é—®ï¼›ä¸€èˆ¬ç”¨äºé™æ€èµ„æºè¿‡æ»¤ï¼›ç¤ºä¾‹â€œ/static/**=anonâ€
 
 
-ÊÚÈ¨Ïà¹ØµÄ
+æˆæƒç›¸å…³çš„
 roles---org.apache.shiro.web.filter.authz.RolesAuthorizationFilter
-½ÇÉ«ÊÚÈ¨À¹½ØÆ÷£¬ÑéÖ¤ÓÃ»§ÊÇ·ñÓµÓĞËùÓĞ½ÇÉ«£»Ö÷ÒªÊôĞÔ£º loginUrl£ºµÇÂ¼Ò³ÃæµØÖ·£¨/login.jsp£©£»unauthorizedUrl£ºÎ´ÊÚÈ¨ºóÖØ¶¨ÏòµÄµØÖ·£»Ê¾Àı¡°/admin/**=roles[admin]¡±
+è§’è‰²æˆæƒæ‹¦æˆªå™¨ï¼ŒéªŒè¯ç”¨æˆ·æ˜¯å¦æ‹¥æœ‰æ‰€æœ‰è§’è‰²ï¼›ä¸»è¦å±æ€§ï¼š loginUrlï¼šç™»å½•é¡µé¢åœ°å€ï¼ˆ/login.jspï¼‰ï¼›unauthorizedUrlï¼šæœªæˆæƒåé‡å®šå‘çš„åœ°å€ï¼›ç¤ºä¾‹â€œ/admin/**=roles[admin]â€
 
 perms---org.apache.shiro.web.filter.authz.PermissionsAuthorizationFilter
-È¨ÏŞÊÚÈ¨À¹½ØÆ÷£¬ÑéÖ¤ÓÃ»§ÊÇ·ñÓµÓĞËùÓĞÈ¨ÏŞ£»ÊôĞÔºÍrolesÒ»Ñù£»Ê¾Àı¡°/user/**=perms["user:create"]¡±
+æƒé™æˆæƒæ‹¦æˆªå™¨ï¼ŒéªŒè¯ç”¨æˆ·æ˜¯å¦æ‹¥æœ‰æ‰€æœ‰æƒé™ï¼›å±æ€§å’Œrolesä¸€æ ·ï¼›ç¤ºä¾‹â€œ/user/**=perms["user:create"]â€
 
 
-»ùÓÚ¶¯Ì¬URLµÄÈ¨ÏŞÆ¥Åä
-ÉÏÊöµÄÈ¨ÏŞ¿ØÖÆÊÇÔÚ´úÂë²ãÃæµÄ¿ØÖÆ£¬ÎÒÃÇÊÇÔÚ´úÂëÀïÃæ¶¨ËÀÄ³Ò»²Ù×÷µÄÈ¨ÏŞ£¬µ«ÈÕ³£¿ª·¢ÖĞ£¬ÎÒÃÇ¶ÔÈ¨ÏŞµÄ²Ù×÷ÊÇËæ»úµÄ£¬Ã»·¨¼¯ÖĞÆğÀ´
-¹ÜÀí£¬Õâ¸öÊ±ºòÎÒÃÇĞèÒªÒ»ÖÖ¼¯ÖĞ¹ÜÀíµÄÈ¨ÏŞ¿ØÖÆ£¬¼´»ùÓÚURLµÄÈ¨ÏŞ¿ØÖÆ¡£
+åŸºäºåŠ¨æ€URLçš„æƒé™åŒ¹é…
+ä¸Šè¿°çš„æƒé™æ§åˆ¶æ˜¯åœ¨ä»£ç å±‚é¢çš„æ§åˆ¶ï¼Œæˆ‘ä»¬æ˜¯åœ¨ä»£ç é‡Œé¢å®šæ­»æŸä¸€æ“ä½œçš„æƒé™ï¼Œä½†æ—¥å¸¸å¼€å‘ä¸­ï¼Œæˆ‘ä»¬å¯¹æƒé™çš„æ“ä½œæ˜¯éšæœºçš„ï¼Œæ²¡æ³•é›†ä¸­èµ·æ¥
+ç®¡ç†ï¼Œè¿™ä¸ªæ—¶å€™æˆ‘ä»¬éœ€è¦ä¸€ç§é›†ä¸­ç®¡ç†çš„æƒé™æ§åˆ¶ï¼Œå³åŸºäºURLçš„æƒé™æ§åˆ¶ã€‚
 
-ÕâÖÖ·½Ê½ÊÇÍ¨¹ıshiroµÄ¹ıÂËÁ´ÊµÏÖµÄ£¬ÓÉÓÚÄ¬ÈÏPathMatchingFilterChainResolverÊµÏÖÓĞÎÊÌâ
-(Èç¹û¶à¸öÀ¹½ØÆ÷Á´¶¼Æ¥ÅäÁËµ±Ç°ÇëÇóURL£¬ÄÇÃ´Ö»·µ»ØµÚÒ»¸öÕÒµ½µÄÀ¹½ØÆ÷Á´£»ºóĞøÎÒÃÇ¿ÉÒÔĞŞ¸Ä´Ë´¦µÄ´úÂë£¬½«¶à¸öÆ¥ÅäµÄÀ¹½ØÆ÷Á´ºÏ²¢·µ»Ø¡£),ËùÒÔÎÒÃÇĞèÒª¸ÄÔì¹ıÂËÁ´¡£
+è¿™ç§æ–¹å¼æ˜¯é€šè¿‡shiroçš„è¿‡æ»¤é“¾å®ç°çš„ï¼Œç”±äºé»˜è®¤PathMatchingFilterChainResolverå®ç°æœ‰é—®é¢˜
+(å¦‚æœå¤šä¸ªæ‹¦æˆªå™¨é“¾éƒ½åŒ¹é…äº†å½“å‰è¯·æ±‚URLï¼Œé‚£ä¹ˆåªè¿”å›ç¬¬ä¸€ä¸ªæ‰¾åˆ°çš„æ‹¦æˆªå™¨é“¾ï¼›åç»­æˆ‘ä»¬å¯ä»¥ä¿®æ”¹æ­¤å¤„çš„ä»£ç ï¼Œå°†å¤šä¸ªåŒ¹é…çš„æ‹¦æˆªå™¨é“¾åˆå¹¶è¿”å›ã€‚),æ‰€ä»¥æˆ‘ä»¬éœ€è¦æ”¹é€ è¿‡æ»¤é“¾ã€‚
 
-¸ÄÔìÁ÷³Ì:
-1¡¢ShiroFilerChainManager ¸ºÔğ³õÊ¼»¯¹ıÂËÁ´£¬@PostConstruct±£Ö¤spring³õÊ¼»¯Ê±Ö´ĞĞ£¬½«springÅäÖÃµÄÄ¬ÈÏ¹ıÂËÁ´×¢Èëµ½±¾ÀàÖĞµÄ
-³ÉÔ±±äÁ¿filterChainManagerÖĞ£¬È»ºó½«Êı¾İ¿âÖĞ¹ıÂËÁ´Ìí¼Ó½øÈ¥¡£Ã¿´ÎĞŞ¸ÄÈ¨ÏŞÅäÖÃÊ±£¬¶¼ÒªÊÖ¶¯µ÷ÓÃShiroFilerChainManager.initFilterChainsÀ´³õÊ¼»¯¹ıÂËÁ´¡£
-2¡¢PathMatchingFilterChainResolver½øĞĞÆ¥ÅäÊ±£¬ÊÇÒ»µ©Æ¥Åäµ½ºÏÊÊµÄ¹ıÂË¾Í·µ»Ø£¬ÎÒÃÇĞèÒª×Ô¶¨ÒåÒ»¸ö£¬ÈÃËû·µ»ØÒ»¸ö¹ıÂËÁ´µÄ¼¯ºÏ
-3¡¢DefaultFilterChainManager½ÓÊÜ´úÀíÊ±ĞèÒªĞŞ¸Ä²ÎÊı¶¨Òå£¬ÈÃÆä¿ÉÒÔ½ÓÊÕ¹ıÂËÁ´µÄ¼¯ºÏ¡£
+æ”¹é€ æµç¨‹:
+1ã€ShiroFilerChainManager è´Ÿè´£åˆå§‹åŒ–è¿‡æ»¤é“¾ï¼Œ@PostConstructä¿è¯springåˆå§‹åŒ–æ—¶æ‰§è¡Œï¼Œå°†springé…ç½®çš„é»˜è®¤è¿‡æ»¤é“¾æ³¨å…¥åˆ°æœ¬ç±»ä¸­çš„
+æˆå‘˜å˜é‡filterChainManagerä¸­ï¼Œç„¶åå°†æ•°æ®åº“ä¸­è¿‡æ»¤é“¾æ·»åŠ è¿›å»ã€‚æ¯æ¬¡ä¿®æ”¹æƒé™é…ç½®æ—¶ï¼Œéƒ½è¦æ‰‹åŠ¨è°ƒç”¨ShiroFilerChainManager.initFilterChainsæ¥åˆå§‹åŒ–è¿‡æ»¤é“¾ã€‚
+2ã€PathMatchingFilterChainResolverè¿›è¡ŒåŒ¹é…æ—¶ï¼Œæ˜¯ä¸€æ—¦åŒ¹é…åˆ°åˆé€‚çš„è¿‡æ»¤å°±è¿”å›ï¼Œæˆ‘ä»¬éœ€è¦è‡ªå®šä¹‰ä¸€ä¸ªï¼Œè®©ä»–è¿”å›ä¸€ä¸ªè¿‡æ»¤é“¾çš„é›†åˆ
+3ã€DefaultFilterChainManageræ¥å—ä»£ç†æ—¶éœ€è¦ä¿®æ”¹å‚æ•°å®šä¹‰ï¼Œè®©å…¶å¯ä»¥æ¥æ”¶è¿‡æ»¤é“¾çš„é›†åˆã€‚
 
-±ÈÈç /show.jsp=auth1 /** = auth2 Ä¬ÈÏÇé¿öÏÂÖ»°´ÕÕÅäÖÃË³ĞòÖ´ĞĞAuth1µÄ¹ıÂËÆ÷  ¶øAuth2µÄ¹ıÂËÆ÷²»ÔÙÖ´ĞĞ
+æ¯”å¦‚ /show.jsp=auth1 /** = auth2 é»˜è®¤æƒ…å†µä¸‹åªæŒ‰ç…§é…ç½®é¡ºåºæ‰§è¡ŒAuth1çš„è¿‡æ»¤å™¨  è€ŒAuth2çš„è¿‡æ»¤å™¨ä¸å†æ‰§è¡Œ
 
 
-Redis¼¯ÖĞ¹²Ïísession
-Ê¹ÓÃ¼Ü°üReids-session
+Redisé›†ä¸­å…±äº«session
+ä½¿ç”¨æ¶åŒ…Reids-session

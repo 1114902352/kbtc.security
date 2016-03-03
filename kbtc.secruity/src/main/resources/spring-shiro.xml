@@ -13,7 +13,7 @@
 	<bean id="webRealm" class="com.ai.shiro.web.WebRealm">
 		<property name="cachingEnabled" value="true" />
 	</bean>
-	<!-- 权限认证策略 -->
+	<!-- 权限认证策略，多Realm时生效 -->
 	<bean id="authenticator" class="org.apache.shiro.authc.pam.ModularRealmAuthenticator">
 		<property name="authenticationStrategy">
 			<bean class="org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy" />
