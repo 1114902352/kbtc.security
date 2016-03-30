@@ -7,6 +7,10 @@
              http://www.springframework.org/schema/context  
              http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
+	<bean class="com.ai.test.controller.TestLifeCycle">
+		<property name="number" value="1"></property>
+	</bean>
+
 	<!--配置文件properties -->
 	<context:property-placeholder
 		location="classpath*:/kbtc_dev.properties,classpath*:/redis.properties" />
