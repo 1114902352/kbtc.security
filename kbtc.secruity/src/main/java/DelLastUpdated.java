@@ -17,6 +17,7 @@ public class DelLastUpdated {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		System.out.println("12321421412412412");
 		System.out.println("删除开始...");
 		File mavenRep = new File(MAVEN_REPO_PATH);
 		if (!mavenRep.exists()) {
@@ -27,6 +28,7 @@ public class DelLastUpdated {
 		delFileRecr(files, null);
 		_log.info("Clean lastUpdated files finished.");
 		System.out.println("完成删除!");
+		System.out.println("1232142141241215333333333333333");
 	}
 
 	private static void delFileRecr(File[] dirs, File[] files) {
