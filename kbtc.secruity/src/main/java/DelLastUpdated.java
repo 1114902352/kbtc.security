@@ -17,6 +17,8 @@ public class DelLastUpdated {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		System.out.print("aaaaaaaaaa");
+		System.out.println("bbbbbbbbbbbbbbb");
 		File mavenRep = new File(MAVEN_REPO_PATH);
 		if (!mavenRep.exists()) {
 			_log.warn("Maven repos is not exist.");
