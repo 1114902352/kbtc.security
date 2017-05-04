@@ -18,7 +18,7 @@ public class DelLastUpdated {
 	 */
 	public static void main(String[] args) {
 		System.out.print("git");
-		System.out.print("测试");
+		System.out.print("测试............");
 		File mavenRep = new File(MAVEN_REPO_PATH);
 		if (!mavenRep.exists()) {
 			_log.warn("Maven repos is not exist.");
