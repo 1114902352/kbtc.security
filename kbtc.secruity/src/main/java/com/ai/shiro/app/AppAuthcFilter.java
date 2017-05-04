@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.web.filter.AccessControlFilter;
 
-import com.sun.tools.javac.util.Constants;
-
 public class AppAuthcFilter extends AccessControlFilter {
 
 	@Override
