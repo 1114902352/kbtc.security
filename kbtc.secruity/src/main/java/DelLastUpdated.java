@@ -17,6 +17,7 @@ public class DelLastUpdated {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		System.out.println("删除开始...");
 		File mavenRep = new File(MAVEN_REPO_PATH);
 		if (!mavenRep.exists()) {
 			_log.warn("Maven repos is not exist.");
@@ -25,6 +26,7 @@ public class DelLastUpdated {
 		File[] files = mavenRep.listFiles((FilenameFilter) FileFilterUtils.directoryFileFilter());
 		delFileRecr(files, null);
 		_log.info("Clean lastUpdated files finished.");
+		System.out.println("完成删除!");
 	}
 
 	private static void delFileRecr(File[] dirs, File[] files) {
